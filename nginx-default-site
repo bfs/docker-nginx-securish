@@ -1,0 +1,27 @@
+server {
+    listen 443 default ssl;
+    server_name {{NAME}};
+
+    ssl                 on;
+    ssl_certificate     /etc/ssl/nginx/server.crt;
+    ssl_certificate_key /etc/ssl/nginx/server.key;
+    
+    {{#SSL_CLIENT}}
+      ssl_verify_client on;
+      ssl_client_certificate /etc/ssl/nginx/client.pem;
+    {{/SSL_CLIENT}}
+
+    ssl_session_timeout  5m;
+    ssl_protocols  SSLv2 SSLv3 TLSv1;
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers   on;
+
+    location / {
+        root   /var/www/;
+        index  index.html;
+        {{#ALLOW_NET}}
+          allow {{ALLOW_NET}};
+          deny all;
+        {{/ALLOW_NET}}
+    }
+}
