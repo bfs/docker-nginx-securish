@@ -7,9 +7,6 @@ mkdir -p /etc/ssl/nginx
 if [[ -n $SSL_CERT ]] &&  [[ -n $SSL_KEY ]]; then
    echo "$SSL_CERT" > /etc/ssl/nginx/server.crt
    echo "$SSL_KEY" > /etc/ssl/nginx/server.key
-else
-   echo "One or more SSL environment variables are missing : SSL_CERT, SSL_KEY"
-   exit 1
 fi
 
 if [ -n $SSL_CLIENT ]; then

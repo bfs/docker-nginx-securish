@@ -14,5 +14,3 @@ VOLUME /var/www
 ADD nginx-default-site /etc/nginx/sites-disabled/default
 
 ADD start.sh /etc/my_init.d/
-
-EXPOSE 443
